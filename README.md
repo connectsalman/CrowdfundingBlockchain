@@ -5,21 +5,6 @@ A full-stack, decentralized crowdfunding platform built on the Ethereum blockcha
 
 ---
 
-## 📋 Table of Contents
-
-- [Overview](#-overview)
-- [Key Features](#-key-features)
-- [Tech Stack](#-tech-stack)
-- [Architecture & Directory Structure](#-architecture--directory-structure)
-- [Smart Contract Specification](#-smart-contract-specification)
-- [Prerequisites](#-prerequisites)
-- [Installation & Setup](#-installation--setup)
-- [Environment Variables](#-environment-variables)
-- [Usage Guide](#-usage-guide)
-- [Deployment](#-deployment)
-- [License](#-license)
-
----
 
 ## 📌 Overview
 
