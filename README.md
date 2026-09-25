@@ -1,7 +1,7 @@
 ```markdown
 # Web3 Blockchain Crowdfunding Platform (Kickstarter DApp)
 
-A full-stack, decentralized crowdfunding platform built on the Ethereum blockchain. This application allows creators to publish creative campaigns, set funding targets and deadlines, and receive direct cryptocurrency donations from supporters worldwide without third-party intermediaries or central processing fees.
+A full-stack, Decentralized crowdfunding platform built on the Ethereum blockchain. This application allows creators to publish creative campaigns, set funding targets and deadlines, and receive direct cryptocurrency donations from supporters worldwide without third-party intermediaries or central processing fees.
 
 ---
 
