@@ -248,6 +248,32 @@ This generates a production-ready `dist/` directory. Upload or link this folder 
 
 ---
 
+## 🧪 Testing
+
+Tests are written with [Foundry](https://book.getfoundry.sh/) and cover campaign creation, donations, deadline checks and failed transfers.
+
+```
+cd web3
+forge install foundry-rs/forge-std
+forge test -vv
+```
+
+## 🔐 Security Notes
+
+Fixed in the latest version of `Crowdfunding.sol`:
+- Deadline is validated against the value passed in (not an empty campaign).
+- Only the caller can create a campaign under their own address.
+- Donations to ended or non-existent campaigns revert, and zero-value donations are rejected.
+- A failed ETH transfer reverts the whole donation (no stuck funds, no false records).
+- State is updated before the ETH transfer (checks-effects-interactions).
+
+Known limitations:
+- No refund mechanism: donations go straight to the campaign owner, even if the target is not reached.
+- Campaign target is not enforced on-chain.
+- `getCampaigns()` loops over all campaigns, so it will get expensive as the number grows.
+- Deadlines use Unix time in seconds.
+- Not audited. Use on testnets only.
+
 ## 📄 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
