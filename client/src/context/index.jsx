@@ -2,7 +2,6 @@ import React, { useContext, createContext } from 'react';
 
 import { useAddress, useContract, useMetamask, useContractWrite } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
-import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
 
 const StateContext = createContext();
 
@@ -21,7 +20,7 @@ export const StateContextProvider = ({ children }) => {
 					form.title, // title
 					form.description, // description
 					form.target,
-					new Date(form.deadline).getTime(), // deadline,
+					Math.floor(new Date(form.deadline).getTime() / 1000), // deadline in seconds
 					form.image,
 				],
 			});
@@ -40,7 +39,7 @@ export const StateContextProvider = ({ children }) => {
       title: campaign.title,
       description: campaign.description,
       target: ethers.utils.formatEther(campaign.target.toString()),
-      deadline: campaign.deadline.toNumber(),
+      deadline: campaign.deadline.toNumber() * 1000,
       amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
       image: campaign.image,
       pId: i
