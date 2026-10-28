@@ -1,7 +1,7 @@
-/ SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-contract CrowdFunding {
+contract Crowdfunding {
     struct Campaign {
         address owner;
         string title;
@@ -15,13 +15,22 @@ contract CrowdFunding {
     }
 
     mapping(uint256 => Campaign) public campaigns;
-
     uint256 public numberOfCampaigns = 0;
 
-    function createCampaign(address _owner, string memory _title, string memory _description, uint256 _target, uint256 _deadline, string memory _image) public returns (uint256) {
-        Campaign storage campaign = campaigns[numberOfCampaigns];
+    function createCampaign(
+        address _owner,
+        string memory _title,
+        string memory _description,
+        uint256 _target,
+        uint256 _deadline,
+        string memory _image
+    ) public returns (uint256) {
+        // Only the caller can create a campaign under their own address
+        require(_owner == msg.sender, "Owner must be the caller.");
+        // Check the NEW deadline, not an empty campaign
+        require(_deadline > block.timestamp, "The deadline should be a date in the future.");
 
-        require(campaign.deadline < block.timestamp, "The deadline should be a date in the future.");
+        Campaign storage campaign = campaigns[numberOfCampaigns];
 
         campaign.owner = _owner;
         campaign.title = _title;
@@ -32,35 +41,33 @@ contract CrowdFunding {
         campaign.image = _image;
 
         numberOfCampaigns++;
-
         return numberOfCampaigns - 1;
     }
 
     function donateToCampaign(uint256 _id) public payable {
-        uint256 amount = msg.value;
-
+        require(_id < numberOfCampaigns, "Campaign does not exist.");
         Campaign storage campaign = campaigns[_id];
+        require(block.timestamp < campaign.deadline, "Campaign has ended.");
+        require(msg.value > 0, "Donation must be greater than zero.");
 
+        // Update records first, then send the ETH
         campaign.donators.push(msg.sender);
-        campaign.donations.push(amount);
+        campaign.donations.push(msg.value);
+        campaign.amountCollected += msg.value;
 
-        (bool sent,) = payable(campaign.owner).call{value: amount}("");
-
-        if(sent) {
-            campaign.amountCollected = campaign.amountCollected + amount;
-        }
+        (bool sent, ) = payable(campaign.owner).call{value: msg.value}("");
+        require(sent, "Failed to send ETH to the campaign owner.");
     }
 
-    function getDonators(uint256 _id) view public returns (address[] memory, uint256[] memory) {
+    function getDonators(uint256 _id) public view returns (address[] memory, uint256[] memory) {
         return (campaigns[_id].donators, campaigns[_id].donations);
     }
 
     function getCampaigns() public view returns (Campaign[] memory) {
         Campaign[] memory allCampaigns = new Campaign[](numberOfCampaigns);
 
-        for(uint i = 0; i < numberOfCampaigns; i++) {
+        for (uint256 i = 0; i < numberOfCampaigns; i++) {
             Campaign storage item = campaigns[i];
-
             allCampaigns[i] = item;
         }
 
