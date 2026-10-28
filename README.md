@@ -185,8 +185,8 @@ Before running the project locally, ensure you have the following installed:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/web3-crowdfunding-platform.git
-cd web3-crowdfunding-platform
+   git clone https://github.com/connectsalman/CrowdfundingBlockchain.git
+   cd CrowdfundingBlockchain
 ```
 
 ### 2. Configure & Deploy Smart Contract (`web3/`)
@@ -252,7 +252,3 @@ This generates a production-ready `dist/` directory. Upload or link this folder 
 
 Distributed under the MIT License. See `LICENSE` for more information.
 ```
-
----
-
-💡 Would you like to add automated test scripts for the smart contract, add additional fields to the `README.md` (such as a troubleshooting section), or update your portfolio repository description?
