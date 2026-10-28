@@ -8,3 +8,8 @@ typechain-types
 #Hardhat files
 cache*
 artifacts*
+
+out/
+cache/
+lib/
+.env
