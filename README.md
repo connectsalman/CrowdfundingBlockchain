@@ -20,7 +20,7 @@ Traditional crowdfunding platforms charge high platform fees, impose regional pa
 
 - 🦊 **MetaMask Wallet Integration**: One-click wallet pairing via Thirdweb SDK.
 - 🚀 **Campaign Creation**: Launch new campaigns specifying campaign title, story/description, target goal (in ETH), deadline date, and banner image URL.
-- 💸 **On-Chain Donations**: Fund active campaigns directly using Ethereum testnet funds (Sepolia / Goerli).
+- 💸 **On-Chain Donations**: Fund active campaigns directly using Ethereum testnet funds (Sepolia).
 - 📊 **Real-Time Campaign Metrics**:
   - Dynamically calculated funding progress bar (`%` raised vs. target).
   - Countdown indicator for remaining days.
